@@ -1,3 +1,8 @@
+<?php
+    header('Location: page/start.php');
+    die;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
