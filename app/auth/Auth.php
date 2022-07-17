@@ -7,7 +7,7 @@ class Auth {
     private $connect;
 
     public function __construct() {
-        $this->connect = mysqli_connect('localhost', 'root', '', 'aktivitas_instagram');
+        $this->connect = mysqli_connect('sql110.epizy.com', 'epiz_32185895', 'OxELDenJtMzjNi', 'aktivitas_instagram');
         if(!$this->connect) {
             throw new DbError('terjadi kesalahan pada saat koneksi ke database');
         }
