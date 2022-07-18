@@ -1,18 +1,9 @@
 <?php
 namespace auth;
 
-use exception\DbError;
+use db\ConnectDb;
 
-class Auth {
-    private $connect;
-
-    public function __construct() {
-        $this->connect = mysqli_connect('sql110.epizy.com', 'epiz_32185895', 'OxELDenJtMzjNi', 'aktivitas_instagram');
-        if(!$this->connect) {
-            throw new DbError('terjadi kesalahan pada saat koneksi ke database');
-        }
-    }
-
+class Auth extends ConnectDb {
     public function login() {}
 
     public function logout() {}
