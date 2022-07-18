@@ -16,17 +16,18 @@ if(isset($_POST['mulai']) || isset($_GET['code'])) {
                 $idUser = $id;
             } else {
                 $auth->otorasi();
+                die;
             }
         } else {
             $auth->otorasi();
+            die;
         }
-        die;
     } else {
-        $token = $auth->generateApiKey($_GET['code']);
-        $idUser = $auth->getUserid($token);
+        $token = json_decode($auth->generateApiKey($_GET['code']), true);
+        $idUser = $token['user_id'];
     }
-    setcookie('aktv', password_hash($idUser, PASSWORD_DEFAULT), time() + 60 * 60 * 24 * 5);   
-    echo $idUser;
+    setcookie('aktv', password_hash($idUser, PASSWORD_DEFAULT), time() + 60 * 60 * 24 * 5); 
+    echo 'id user : ' . $idUser;
     // check api key
     die;
 }

@@ -46,7 +46,7 @@ class Auth extends ConnectDb {
         }
         foreach($usersId as $id) {
             if(password_verify($id['user_id'], $hashId)) {
-                return $id;
+                return $id['user_id'];
             }
         }
         return false;

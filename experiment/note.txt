@@ -18,4 +18,7 @@ https://lramdhan.github.io/aktivitas-instagram/?code=AQA8kMHE7xhh_61REmHsq3DYkNv
 #api key
 respon berupa json
 
+#db di hosting
+ $this->connect = mysqli_connect('sql304.epizy.com', 'epiz_32190553', 'UCvdZ2Ztb5np', 'epiz_32190553_aktivitas_instagram');
+
 current : 
