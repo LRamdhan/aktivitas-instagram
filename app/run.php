@@ -1,6 +1,7 @@
 <?php
 
-require '../app/init.php';
+require 'classes/init.php';
+
 
 use auth\Auth;
 use exception\DbError;

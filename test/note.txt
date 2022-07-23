@@ -8,9 +8,8 @@
 2. jika ada, ambil user id di db
 3. jika tidak ada, lakukan langkah diatas
 
-*cookie berisi enkripsi user id
+#cookie berisi enkripsi user id
 id user di database berisi id user yang tidak dienkripsi
-
 
 #kode otorasi
 https://lramdhan.github.io/aktivitas-instagram/?code=AQA8kMHE7xhh_61REmHsq3DYkNvn7L2wf7yg0J0wmW9qRQitscM_6R08ushKalX-FHWfD6EH3_TOfTk-4xizoxy4GkSOaI1xMgUNP8qsFFwKEtf-rT4x5PPOcVs3UpJUvdGomtkRl_esYjpYZSMy-FlRe1MhUegt89EG0W63jFGmouLkypKs5IGV_T40FN3JR47FIa-_AFcLotsC4dw-Ck7T8200gyOrcsLcgm_vtMcRCg#_
@@ -20,5 +19,11 @@ respon berupa json
 
 #db di hosting
  $this->connect = mysqli_connect('sql304.epizy.com', 'epiz_32190553', 'UCvdZ2Ztb5np', 'epiz_32190553_aktivitas_instagram');
+
+#isi cookie
+hash user id, token
+
+setiap melakukan berpindah halaman harus memeriksa cookie['statin]
+
 
 current : 

@@ -1,6 +1,9 @@
 <?php
-    header('Location: page/start.php');
-    die;
+    
+require 'app/run.php';
+
+$auth->checkCookieValid();
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +15,6 @@
     <title>aktivitas instagram</title>
 </head>
 <body>
-    <h2>hello guys</h2>
+    <h2>selamat datang di aktivitas instagram</h2>
 </body>
 </html>
