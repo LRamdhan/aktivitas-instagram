@@ -1,3 +1,11 @@
+<?php
+    
+require 'app/run.php';
+
+$auth->checkCookieInvalid();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +15,10 @@
     <title>aktivitas instagram</title>
 </head>
 <body>
-    <h2>hello guys</h2>
+    <h2>selamat datang di aktivitas instagram</h2>
+
+    <form action="page/start.php" method="post">
+        <button type="submit" name="logout" value="1">logout</button>
+    </form>
 </body>
 </html>

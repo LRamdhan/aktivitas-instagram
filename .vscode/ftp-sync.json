@@ -1,0 +1,28 @@
+{
+    "remotePath": "./htdocs",
+    "host": "ftpupload.net",
+    "username": "epiz_32190553",
+    "password": "UCvdZ2Ztb5np",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": false,
+    "passive": true,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [""],
+    "ignore": [
+        "\\htdocs\\.git",
+        "\\htdocs\\classes\\db\\ConnectDb.php",
+        "\\htdocs\\.vscode",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ""
+        ],
+        "path": ""
+    }
+}
