@@ -9,7 +9,7 @@ class Auth extends ConnectDb {
         if(isset($_POST['mulai']) || isset($_GET['code'])) {
             if(isset($_POST['mulai'])) {
                 if(isset($_COOKIE['aktv'])) {
-                    $dUser = $this->checkUserId($_COOKIE['aktv']);
+                    $dUser = $this->checkHashUserId($_COOKIE['aktv']);
                     if($dUser) {
                         $idUser = $dUser['user_id'];
                         $token = $dUser['api_key'];
@@ -25,30 +25,44 @@ class Auth extends ConnectDb {
                 $token = json_decode($this->generateApiKey($_GET['code']), true);
                 $idUser = $token['user_id'];
                 $token = $token['access_token'];
+                $otorasi = true;
             }
             
             // cek user di db
-            if($this->checkUserId($idUser)) {
-                if($this->checkExpKey($token)) {
-                    $this->otorasi();
-                    die;
+            if($kUser = $this->checkUserId($idUser)) {
+                if($this->checkExpKey($kUser['api_key'])) {
+                    $this->hapusUser($idUser);
+                    if($otorasi) {
+                        $token = $this->perpanjangToken($token); 
+                        $this->tambahUserDb($idUser, $token);
+                    } else {
+                        $this->otorasi();
+                        die;
+                    }
+                    // end
                 } else {
-                    $token = $this->perpanjangToken($token);
+                    $token = $this->perpanjangTokenPanjang($kUser['api_key']);
                     $this->updateTokenDb($idUser, $token);
                     // end
                 }
             } else {
-                $token = $this->perpanjangToken($token);
+                $token = $this->perpanjangToken($token); 
                 $this->tambahUserDb($idUser, $token);
                 // end
             }
 
-            setcookie('aktv', password_hash($idUser, PASSWORD_DEFAULT), time() + 60 * 60 * 24 * 5); 
-            setcookie('kytok', password_hash($token, PASSWORD_DEFAULT), time() + 60 * 60 * 24 * 5);
-            setcookie('statin', true);
+            setcookie('aktv', password_hash($idUser, PASSWORD_DEFAULT), time() + 60 * 60 * 24 * 5, '/'); 
+            setcookie('kytok', $token, time() + 60 * 60 * 24 * 5, '/');
+            setcookie('statin', true, 0, '/');
             return true;
         }
         return false;
+    }
+
+    public function logout() {
+        setcookie('aktv', null, time() - 3600, '/');
+        setcookie('kytok', null, time() - 3600, '/');
+        setcookie('statin', null, time() - 3600, '/');
     }
 
     public function generateApiKey($otoCode) {
@@ -73,7 +87,7 @@ class Auth extends ConnectDb {
         return header('Location: https://api.instagram.com/oauth/authorize?client_id=808287670337426&redirect_uri=https://aktivitasinstagram.ga/page/start.php&scope=user_profile,user_media&response_type=code');
     }
      
-    public function checkUserId($hashId) {
+    public function checkHashUserId($hashId) {
         $query = mysqli_query($this->connect, "SELECT user_id, api_key FROM users");
         $usersId = [];
         while($ud = mysqli_fetch_assoc($query)) {
@@ -87,12 +101,18 @@ class Auth extends ConnectDb {
         return false;
     }
 
+    public function checkUserId($id) {
+        $query = mysqli_query($this->connect, "SELECT user_id, api_key FROM users WHERE user_id = '$id'");
+        if($data = mysqli_fetch_assoc($query)) return $data;
+        return false;
+    }
+
     public function checkExpKey($token) {
         $rc = curl_init();
-        curl_setopt($rc, CURLOPT_URL, 'https://graph.instagram.com/me?fields=id&access_token=IGQVJVZAkNySnlzaDRqZA2NUT3EwY1dTWVdrQWNmN2NZAcGhvOGVTMGpkX1ZAFSFEtSE1uaGk5S2REdGtNcXBKd1BYOE1KaXF4eDJxeGtxeWVqcW0wRXl3OVl1MmF4MUd4cDgxTDNqTmVtV3kxSkpMeHdIXzNnQk9JUWd5LXow');
+        curl_setopt($rc, CURLOPT_URL, "https://graph.instagram.com/me?fields=id&access_token=$token");
         curl_setopt($rc, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rc, CURLOPT_CUSTOMREQUEST, 'GET');
-        $response = curl_exec($rc);
+        $response = json_decode(curl_exec($rc), true);
         curl_close($rc);
         if(isset($response['error'])) return true;
         return false;
@@ -100,12 +120,12 @@ class Auth extends ConnectDb {
 
     public function perpanjangToken($token) {
         $rc = curl_init();
-        curl_setopt($rc, CURLOPT_URL, ' https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=d4e8b44cec77f7fd6d8bf2813bc425f9&access_token=' . $token);
+        curl_setopt($rc, CURLOPT_URL, 'https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=d4e8b44cec77f7fd6d8bf2813bc425f9&access_token=' . $token);
         curl_setopt($rc, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rc, CURLOPT_CUSTOMREQUEST, 'GET');
-        $response = curl_exec($rc);
+        $response = json_decode(curl_exec($rc), true);
         curl_close($rc);
-        return $response;
+        return $response['access_token'];
     }
 
     public function updateTokenDb($id, $token) {
@@ -117,9 +137,36 @@ class Auth extends ConnectDb {
     }
 
     public function checkCookieValid() {
-        if(!$_COOKIE['statin']) {
-            header('Location: /');
+        if(isset($_COOKIE['statin'])) {
+            header('Location: ../index.php');
             die;
         }
+    }
+    
+    public function checkCookieInvalid() {
+        if(!isset($_COOKIE['statin'])) {
+            header('Location: /page/start.php');
+            die;
+        }
+    }
+
+    public function perpanjangTokenPanjang($token) {
+        $rc = curl_init();
+        curl_setopt($rc, CURLOPT_URL, "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$token");
+        curl_setopt($rc, CULROPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($rc, CURLOPT_RETURNTRANSFER, 1);
+        $response = json_decode(curl_exec($rc), true);
+        curl_close($rc);
+        return $response['access_token'];
+    } 
+ 
+    public function checkToken($token) {
+        $query = mysqli_query($this->connect, "SELECT * FROM users WHERE api_key = '$token'");
+        if(mysqli_fetch_assoc($query)) return true;
+        return false;
+    }
+
+    public function hapusUser($id) {
+        return mysqli_query($this->connect, "DELETE FROM users WHERE user_id = '$id'");
     }
 }

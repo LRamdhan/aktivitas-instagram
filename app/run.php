@@ -1,7 +1,6 @@
 <?php
 
-require 'classes/init.php';
-
+require $_SERVER['DOCUMENT_ROOT'] . '/classes/init.php';
 
 use auth\Auth;
 use exception\DbError;

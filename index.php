@@ -2,7 +2,7 @@
     
 require 'app/run.php';
 
-$auth->checkCookieValid();
+$auth->checkCookieInvalid();
 
 ?>
 
@@ -16,5 +16,9 @@ $auth->checkCookieValid();
 </head>
 <body>
     <h2>selamat datang di aktivitas instagram</h2>
+
+    <form action="page/start.php" method="post">
+        <button type="submit" name="logout" value="1">logout</button>
+    </form>
 </body>
 </html>

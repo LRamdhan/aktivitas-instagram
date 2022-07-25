@@ -1,15 +1,18 @@
 <?php
 
-require '../exe/run.php';
+require '../app/run.php';
+
+if(isset($_POST['logout'])) {
+    $auth->logout();
+}
 
 $auth->checkCookieValid();
 
 // jika tombol mulai ditekan
 if($auth->login()) {
-    header("Location: ../");
+    header("Location: ../index.php");
     die;
 }
-
 
 // jika tidak melakukan apapun
 echo '<!DOCTYPE html>
