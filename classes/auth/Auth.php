@@ -1,7 +1,11 @@
 <?php
 namespace auth;
 
-use db\ConnectDb;
+// di hosting
+// use db\ConnectDb;
+
+// di local
+use db2\ConnectDb;
 
 class Auth extends ConnectDb {
     public function login() {
