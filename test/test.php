@@ -1,17 +1,10 @@
 <?php
-$satu = 'IGQVJXUHlvNjROckpsWWFFUnVVV29PTTUwR0Y4QzUtN3UzNDNadFBHeHNYWkVvN0lLaElpMnVTYkltc1A0VGh5TS1YVFZAxZAmdRVnpKUlFlUGptekU1T2R0X3V5TnVyM01ua2pTY0h3';
+    // echo $_SERVER['DOCUMENT_ROOT'];
+    // require $_SERVER['DOCUMENT_ROOT'] . '/tutorial/rest api/chapter06/aktivitas-instagram/test/store.php';
+    // header('Location: ' . $_SERVER['DOCUMENT_ROOT'] . '/tutorial/rest api/chapter06/aktivitas-instagram/test/store.php');
+    // header('Location: ./test/store.php');
 
-$dua = 'IGQVJWTlRUQjlvY3o4RXBtaTNHTnh2cmhCS0dmNVpzazItd1lTREM4U3dyTVJLSE82NU1TYXZAsVzVSa1o4TFNOVkhaSFlxOVpqU094ZAEE4VU5jczNGYVFWQXRILW1GZA1VubWVXV01R';
-
-$tiga = 'IGQVJVYlpQUWU0YzA2ZA2ZAsYU8wcXBqaDBteWhSUEUtZAGV5aTJDSWtUSjVCSHlCY0tBbjAxWlkwQ3hJdTB3ZAlV3OFRJb0hFeDJCbEF4RG5yQ1duV3FxN1B6UXA3MmFkTm9vSngwak1n';
-
-echo $satu == $dua;
-
-echo "<br>";
-
-echo password_hash('17841407497847965', PASSWORD_DEFAULT);
-
-
+    if(isset($_COOKIE['test'])) echo 'ada';
 ?>
 
 <title>test</title>

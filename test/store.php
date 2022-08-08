@@ -61,10 +61,4 @@
 //     die 
 // }
 
-
-function a() {
-    $i = 1;
-    echo $i;
-}
-
-a();
+echo 'penyimpanan';

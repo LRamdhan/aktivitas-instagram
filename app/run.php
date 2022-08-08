@@ -1,6 +1,10 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'] . '/classes/init.php';
+// di hosting
+// require $_SERVER['DOCUMENT_ROOT'] . '/classes/init.php';
+
+// di local
+require $_SERVER['DOCUMENT_ROOT'] . '\tutorial\rest api\chapter06\aktivitas-instagram\classes\init.php';
 
 use auth\Auth;
 use exception\DbError;

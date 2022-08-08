@@ -20,5 +20,7 @@ $auth->checkCookieInvalid();
     <form action="page/start.php" method="post">
         <button type="submit" name="logout" value="1">logout</button>
     </form>
+
+    <script type="module" src="js/main.js?i=<?= uniqid(); ?>"></script>
 </body>
 </html>

@@ -142,6 +142,10 @@ class Auth extends ConnectDb {
 
     public function checkCookieValid() {
         if(isset($_COOKIE['statin'])) {
+            // di hosting
+            // header('Location: ../index.php');
+
+            // di local
             header('Location: ../index.php');
             die;
         }
@@ -149,7 +153,11 @@ class Auth extends ConnectDb {
     
     public function checkCookieInvalid() {
         if(!isset($_COOKIE['statin'])) {
-            header('Location: /page/start.php');
+            // di hosting
+            // header('Location: /page/start.php');
+
+            // di lokal
+            header('Location: page/start.php');
             die;
         }
     }
