@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(240, 240, 240);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.container {
+    background-color: white;
+    max-width: 800px;
+    box-sizing: border-box;
+    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.data-user {
+    max-width: 550px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-transform: capitalize;
+}
+
+.sub-user {
+    margin-bottom: 10px;
+}
+
+.sub-user h3 {
+    font-size: 16px;
+    color: rgb(44, 44, 44)
+}
+
+.tombol {
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.form-logout {  
+    margin-bottom: 25px;
+}
+
+.postingan {
+    margin-bottom: 25px;
+}
