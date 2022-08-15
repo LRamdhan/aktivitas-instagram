@@ -16,14 +16,6 @@ $auth->checkCookieInvalid();
     <link rel="stylesheet" href="css/style.css?i=<?= uniqid(); ?>">
 </head>
 <body>
-    <!-- <h2>selamat datang di aktivitas instagram</h2>
-    <form action="page/start.php" method="post">
-        <button type="submit" name="logout" value="1">logout</button>
-    </form>
-    <br>
-    <button data-id="17920164473056337" id="detail">detail postingan</button>
-    <button id="muat-lebih">muat lebih</button> -->
-
     <div class="container">
         <section class="data-user">
             <div class="sub-user">
@@ -40,23 +32,27 @@ $auth->checkCookieInvalid();
             </div>
         </section>
 
-        <form action="page/start.php" method="post" class="form-logout">
-            <button type="submit" name="logout" value="1" class="tombol">logout</button>
-        </form>
-
-        <section class="postingan">
-            <ul type="square">
-                <li>
-                    link gambar : <span class="gambar-post"></span>
-                    <br>
-                    waktu : <span class="waktu"></span>
-                    <br>
-                    <button data-id="17920164473056337" id="detail">detail</button>
-                </li>
-            </ul>
+        <section class="logout">
+            <form action="page/start.php" method="post" class="form-logout">
+                <button type="submit" name="logout" value="1" class="tombol">logout</button>
+            </form>
         </section>
 
-        <button id="muat-lebih">muat lebih</button>
+        <section class="postingan">
+            <ul type="square" id="post"></ul>
+            <button id="muat-lebih">muat lebih</button>
+        </section>
+
+        <div class="popup popup-hilang">
+            <div class="detail">
+                <button id="tutup">tutup</button>
+                <br>
+                <img id="gambar" class="gambar" src="">
+                <div id="caption" class="caption"></div>
+                <div id="tanggal" class="tanggal"></div>
+                <div id="link" class="link"></div>
+            </div>
+        </div>
     </div>
 
     <!-- <script type="module" src="js/main.js?i=<?= uniqid(); ?>"></script> -->

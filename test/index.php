@@ -7,6 +7,11 @@
     <title>test</title>
 </head>
 <body>
+
+    <div id="container">
+        <button>tombol</button>
+    </div>
+
     <script src="test.js?i=<?= uniqid(); ?>"></script>
 </body>
 </html>

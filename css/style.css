@@ -48,3 +48,38 @@ body {
 .postingan {
     margin-bottom: 25px;
 }
+
+#post li { margin-bottom: 50px }
+
+/* popup detail */
+.popup {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.301);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-hilang {
+    display: none;
+}
+
+.detail {
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 15px;
+    overflow: scroll;
+}
+
+.detail * {margin-bottom: 10px;}
+
+.gambar {
+    width: 170px;
+}
