@@ -29,7 +29,7 @@ let createPostEl = (src, time, id) => {
     // button
     let button = document.createElement('button');
     button.setAttribute('data-id', id);
-    button.class = 'tbl-detail';
+    button.classList.add('tbl-detail');
     button.textContent = 'detail';
 
     // perangkaian
@@ -49,7 +49,8 @@ let showPost = data => {
     if(tipe) data = JSON.parse(data);
     let postParent = document.getElementById('post');
     Array.from(data).forEach(el => {
-        postParent.appendChild(createPostEl((el.thumbnail_url) ? el.thumbnail_url : el.media_url), el.timestamp, el.id);
+        let url = (el.thumbnail_url) ? el.thumbnail_url : el.media_url;
+        postParent.appendChild(createPostEl(url, el.timestamp, el.id));
     }); 
 };
 
