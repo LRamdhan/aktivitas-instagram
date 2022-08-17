@@ -56,6 +56,7 @@ $auth->checkCookieInvalid();
     </div>
 
     <!-- <script type="module" src="js/main.js?i=<?= uniqid(); ?>"></script> -->
-    <script type="module" src="js/modules/requests.js?i=<?= uniqid(); ?>"></script>
+    <!-- <script type="module" src="js/modules/requests.js?i=<?= uniqid(); ?>"></script> -->
+    <script type="module" src="js/app.js?i=<?= uniqid(); ?>"></script>
 </body>
 </html>
