@@ -7,26 +7,50 @@ let showUser = data => {
     Array.from(document.getElementsByClassName('d-user')).forEach((el, ind) => el.textContent = user[ind]);
 };
 
+// buat element tampilan postingan
+let createPostEl = (src, time, id) => {
+    // li
+    let li = document.createElement('li');
+
+    // img
+    let img = document.createElement('img');
+    img.style = 'width: 300px;';
+    img.src = src;
+
+    // br
+    let br1 = document.createElement('br');
+    let br2 = document.createElement('br');
+
+    // span
+    let span = document.createElement('span');
+    span.class = 'waktu';
+    span.textContent = new Date(time).toDateString();
+
+    // button
+    let button = document.createElement('button');
+    button.setAttribute('data-id', id);
+    button.class = 'tbl-detail';
+    button.textContent = 'detail';
+
+    // perangkaian
+    li.appendChild(img);
+    li.appendChild(br1);
+    li.appendChild(span);
+    li.appendChild(br2);
+    li.appendChild(button);
+
+    return li;
+}
+
 // menampilkan postingan
 let showPost = data => {
     if(!data) return;
     let tipe = typeof data == 'string';
     if(tipe) data = JSON.parse(data);
-    let posting = '';
+    let postParent = document.getElementById('post');
     Array.from(data).forEach(el => {
-        posting += `<li>
-            <img src="${(el.thumbnail_url) ? el.thumbnail_url : el.media_url}" style="width: 300px;">
-            <br>
-            waktu : <span class="waktu">${new Date(el.timestamp).toDateString()}</span>
-            <br>
-            <button data-id="${el.id}" class="tbl-detail">detail</button>
-        </li>`;
+        postParent.appendChild(createPostEl((el.thumbnail_url) ? el.thumbnail_url : el.media_url), el.timestamp, el.id);
     }); 
-    if(tipe) {
-        document.getElementById('post').innerHTML = posting;
-        return;
-    }
-    document.getElementById('post').innerHTML += posting;
 };
 
 // menampilkan detail
