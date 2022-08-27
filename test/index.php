@@ -12,6 +12,7 @@
         <button>tombol</button>
     </div>
 
-    <script type="module" src="js/test.js?i=<?= uniqid(); ?>"></script>
+    <!-- <script type="module" src="js/test.js?i=<?= uniqid(); ?>"></script> -->
+    <script type="module" src="js/func.js?i=<?= uniqid(); ?>"></script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+- merequest semua data setiap tahun
+- jika tidak ada sampai tahun sekarang -> return 'tidak ada post'
+- jika tidak -> lanjut
+- jika ya datanya kurang dari dua -> request satu data dengan menggunakan before data pertama, jika tidak ada 
+  sampai tahun sekarang maka return data pertama
+- jika ya -> ambil tanggal data pertama dan kedua
+
+- request since dan until dengan tanggal data pertama(dikurang satu hari) dan data kedua
+- akan muncul pagination, ambil beforenya
+- lakukan request biasa dengan before tersebut dan jalankan pagination
+
+dalam function
+| mereturn response | menjadi synchronous | since & until | date belong to day
