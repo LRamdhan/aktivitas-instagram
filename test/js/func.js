@@ -15,12 +15,19 @@
 //     console.log(a);
 // }
 
-let a, b;
+// const data = (async () => {
+//     return 'katak-kata';
+// })().then(res => console.log(res));
+// console.log(data);
 
-if(a = 0) {
-    console.log('benar');
-} else {
-    console.log('salah');
+// let d = async function() {return 'datanya'};
+// let c;
+// await d().then(m => c = m);
+// console.log(c);
+
+let a = 1; 
+
+for(a; a <= 5; a++) {
+    console.log(a);
 }
 
-console.log(a)

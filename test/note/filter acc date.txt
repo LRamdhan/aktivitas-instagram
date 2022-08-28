@@ -5,7 +5,7 @@
   sampai tahun sekarang maka return data pertama
 - jika ya -> ambil tanggal data pertama dan kedua
 
-- request since dan until dengan tanggal data pertama(dikurang satu hari) dan data kedua
+- request since dan until dengan tanggal data pertama(dikurang satu hari) dan tanggal data kedua
 - akan muncul pagination, ambil beforenya
 - lakukan request biasa dengan before tersebut dan jalankan pagination
 
