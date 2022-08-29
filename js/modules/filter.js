@@ -1,8 +1,10 @@
+const token = 'IGQVJWemdwLUZAJNlZA1S2hSUkprZATVocTA2aWxDNG5faThfZAG4ycmdIeVN0cF9aWnRQemdfWHlsMnRYRURSZAUhwVWRwQjdaanZAqeU04VzVYSm9vMFZALN3FPVEpnUXQ5MGlNX0w2dnF3';
+
 // before dari accending date
-let beforeAccDate;
+let beforeAscDate;
 
 // accending date
-let accDate = async token => {
+let accDate = async () => {
     // mendapatkan tanggal
     let rangeDate;
     await (async () => {
@@ -57,18 +59,30 @@ let accDate = async token => {
     const rangeFirstPost = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&since=${rangeDate.since}&until=${rangeDate.until}`)
         .then(async response => await response.json().then(res => res))
         .catch(response => console.log(`terjadi error : ${response}`));
-    beforeAccDate = rangeFirstPost.paging.cursors.before;
+    let before = rangeFirstPost.paging.cursors.before;
     const firstPost = rangeFirstPost.data[0];
 
     // merequest data secara accending
-    let postAcc = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&limit=5&before=${beforeAccDate}`)
+    let postAcc = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&limit=5&before=${before}`)
         .then(async response => await response.json().then(res => res))
         .catch(response => console.log(`terjadi error : ${response}`));
+    beforeAscDate = postAcc.paging.cursors.before
     postAcc = Array.from(postAcc.data);
     postAcc.push(firstPost);
     return postAcc.reverse();
 };
 
-const post = await accDate('IGQVJWemdwLUZAJNlZA1S2hSUkprZATVocTA2aWxDNG5faThfZAG4ycmdIeVN0cF9aWnRQemdfWHlsMnRYRURSZAUhwVWRwQjdaanZAqeU04VzVYSm9vMFZALN3FPVEpnUXQ5MGlNX0w2dnF3');
+let moreAscDate = async () => {
+    const morePost = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&limit=6&before=${beforeAscDate}`)
+        .then(async response => await response.json().then(res => res))
+        .catch(response => console.log(`terjadi error : ${response}`));
+    if(morePost.data.length == 0) return []; 
+    beforeAscDate = morePost.paging.cursors.before;
+    return Array.from(morePost.data).reverse();
+}
 
-console.log(post);
+const post = await accDate(token);
+
+let data = await moreAscDate();                                                                      
+console.log(data);
+
