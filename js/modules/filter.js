@@ -17,7 +17,7 @@ let accDate = async token => {
                 rps = resp.data; 
                 break;
             }
-            if(!isThere && year == currentYear) return 'tidak ada postingan';
+            if(!isThere && year == currentYear) return [];
         }
 
         // jika data ada satu pada tahunnya
@@ -33,7 +33,7 @@ let accDate = async token => {
                     break;
                 };
                 // data kedua tidak ada
-                if(resp.data.length == 0 && firstYear == currentYear) return rps[0];
+                if(resp.data.length == 0 && firstYear == currentYear) return [rps[0]];
             }
         }
 
@@ -49,6 +49,26 @@ let accDate = async token => {
         });
         return {since: rps[0].timestamp, until: rps[1].timestamp};
     })().then(result => rangeDate = result);
+
+    // jika data tidak atau data hanya ada satu
+    if(Array.isArray(rangeDate)) return rangeDate;
+
+    // mengambil before
+    const rangeFirstPost = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&since=${rangeDate.since}&until=${rangeDate.until}`)
+        .then(async response => await response.json().then(res => res))
+        .catch(response => console.log(`terjadi error : ${response}`));
+    beforeAccDate = rangeFirstPost.paging.cursors.before;
+    const firstPost = rangeFirstPost.data[0];
+
+    // merequest data secara accending
+    let postAcc = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&limit=5&before=${beforeAccDate}`)
+        .then(async response => await response.json().then(res => res))
+        .catch(response => console.log(`terjadi error : ${response}`));
+    postAcc = Array.from(postAcc.data);
+    postAcc.push(firstPost);
+    return postAcc.reverse();
 };
 
-accDate('token');
+const post = await accDate('IGQVJWemdwLUZAJNlZA1S2hSUkprZATVocTA2aWxDNG5faThfZAG4ycmdIeVN0cF9aWnRQemdfWHlsMnRYRURSZAUhwVWRwQjdaanZAqeU04VzVYSm9vMFZALN3FPVEpnUXQ5MGlNX0w2dnF3');
+
+console.log(post);

@@ -3,7 +3,7 @@
 - jika tidak -> lanjut
 - jika ya datanya kurang dari dua -> request satu data dengan menggunakan before data pertama, jika tidak ada 
   sampai tahun sekarang maka return data pertama
-- jika ya -> ambil tanggal data pertama dan kedua
+- jika ya -> ambil tanggal data pertama dan kedua 
 
 - request since dan until dengan tanggal data pertama(dikurang satu hari) dan tanggal data kedua
 - akan muncul pagination, ambil beforenya
