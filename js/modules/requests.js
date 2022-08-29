@@ -20,7 +20,7 @@ let reqUser = () => {
 
 // request postingan lalu masukan data ke local storage
 let reqPost = () => {
-    return fetch(`https://graph.instagram.com/me/media?fields=id, thumbnail_url, timestamp, media_url&access_token=${token}&limit=6`)
+    return fetch(`https://graph.instagram.com/me/media?fields=id, thumbnail_url, timestamp, media_url, media_type&access_token=${token}&limit=6`)
         .then(async response => {
             return await response.json().then(res => {
                 const post = JSON.stringify(res.data);
@@ -40,7 +40,7 @@ let reqDetailPost = postId => {
 
 // muat lebih
 let reqMorePost = () => {
-    return fetch(`https://graph.instagram.com/me/media?fields=id, thumbnail_url, timestamp, media_url&access_token=${token}&limit=6&after=${after}`)
+    return fetch(`https://graph.instagram.com/me/media?fields=id, thumbnail_url, timestamp, media_url, media_type&access_token=${token}&limit=6&after=${after}`)
         .then(async response => await response.json().then(res => {
             if(!res.data.length) return false;
             // perbarui after

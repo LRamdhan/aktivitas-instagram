@@ -25,5 +25,13 @@ hash user id, token
 
 setiap melakukan berpindah halaman harus memeriksa cookie['statin]
 
-
-current : 
+filter asc time period
+- memindahkan pagination ke akhir
+- menggunakan before dari data terakhir
+algoritma
+1. ambil semua data dalam time period
+        jika data ada satu atau tidak ada maka return
+2. ambil tanggal data terakhir(dikurang satu hari) dan data terakhir kedua
+3. lakukan request since dan until dengan tanggal tersebut
+4. akan muncul satu data terakhir, ambil beforenya
+5. lakukan request dengan since until yang sama seperti di awal disertai before tadi

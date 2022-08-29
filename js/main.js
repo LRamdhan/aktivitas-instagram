@@ -29,6 +29,7 @@ tutup.addEventListener('click', event => {
 document.getElementById('muat-lebih').addEventListener('click', async event => {
     event.preventDefault();
     obj.showPost(await obj.reqMorePost());
+    // obj.showPost(await obj.moreAscDate());
     addDetailEvent();
 });
 
@@ -40,5 +41,6 @@ document.getElementById('muat-lebih').addEventListener('click', async event => {
 // request dan tampilkan postingan
 (async () => {
     obj.showPost(await obj.reqPost());
+    // obj.showPost(await obj.ascDate());
     addDetailEvent();
 })();

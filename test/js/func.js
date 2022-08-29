@@ -25,9 +25,16 @@
 // await d().then(m => c = m);
 // console.log(c);
 
-let a = 1; 
+// let data = [1, '2', 3];
+// let f = data.forEach((el, ind) => {
+//     if(el.length == 1) {
+//        data[ind] = '0' + el;
+//     }
+// });
+// console.log(data);
 
-for(a; a <= 5; a++) {
-    console.log(a);
-}
+let tanggal = ['1', '25', '2020'];
+tanggal.unshift(tanggal[1]);
+tanggal.splice(2, 1);
 
+console.log(tanggal);
