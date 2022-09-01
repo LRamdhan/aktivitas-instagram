@@ -1,7 +1,5 @@
-// token dari cookie
-const token = document.cookie.split(' ').find(el => {
-    if(el.startsWith('kytok')) return el;
-}).replace('kytok=', '').replace(';', '');
+// token
+import {token} from './token.js';
 
 // before dari accending date
 let beforeAscDate;
@@ -16,7 +14,7 @@ let beforeATP;
 let since, until;
 
 // accending date
-let ascDate = async () => {
+const ascDate = async () => {
     // mendapatkan tanggal
     let rangeDate;
     await (async () => {
@@ -84,7 +82,8 @@ let ascDate = async () => {
     return postAcc.reverse();
 };
 
-let moreAscDate = async () => {
+// more ascDate
+const moreAscDate = async () => {
     const morePost = await fetch(`https://graph.instagram.com/me/media?fields=id, thumbnail_url, timestamp, media_url&access_token=${token}&limit=6&before=${beforeAscDate}`)
         .then(async response => await response.json().then(res => res))
         .catch(response => console.log(`terjadi error : ${response}`));
@@ -115,7 +114,7 @@ const moreDescTimePeriod = async () => {
     return rangePost.data;
 }
 
-
+// ascTimePeriod
 const ascTimePeriod = async (sinc, unt) => {
     since = sinc;
     until = unt;
@@ -151,6 +150,7 @@ const ascTimePeriod = async (sinc, unt) => {
     return post.data.reverse();
 };
 
+// ascTimePeriod
 const moreAscTimePeriod = async () => {
     const post = await fetch(`https://graph.instagram.com/me/media?fields=timestamp&access_token=${token}&since=${since}&until=${until}&limit=6&before=${beforeATP}`)
     .then(async response => await response.json().then(res => res))
@@ -172,4 +172,4 @@ const type = type => {
     return filter;
 };
 
-export {ascDate, moreAscDate};
+export {ascDate, moreAscDate, descTimePeriod, moreDescTimePeriod, ascTimePeriod, moreAscTimePeriod, type};

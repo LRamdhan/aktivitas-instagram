@@ -1,11 +1,11 @@
-import * as obj from './modules/init.js';
+import {fill, request, filter, statistic} from './modules/init.js';
 
 // menambah event pada setiap tombol detail
 let addDetailEvent = () => {
     Array.from(document.getElementsByClassName('tbl-detail')).forEach(el => {    
         el.addEventListener('click', async event => {
             event.preventDefault();
-            obj.showDetail(await obj.reqDetailPost(event.target.dataset['id']));
+            fill.showDetail(await request.reqDetailPost(event.target.dataset['id']));
             tutup.parentElement.parentElement.classList.toggle('popup-hilang');
         });
     });
@@ -28,19 +28,19 @@ tutup.addEventListener('click', event => {
 // event muat lebih
 document.getElementById('muat-lebih').addEventListener('click', async event => {
     event.preventDefault();
-    obj.showPost(await obj.reqMorePost());
-    // obj.showPost(await obj.moreAscDate());
+    fill.showPost(await request.reqMorePost());
+    // fill.showPost(await filter.moreAscDate());
     addDetailEvent();
 });
 
 // request dan tampilkan user
 (async () => {
-    obj.showUser(await obj.reqUser());
+    fill.showUser(await request.reqUser());
 })();
 
 // request dan tampilkan postingan
 (async () => {
-    obj.showPost(await obj.reqPost());
-    // obj.showPost(await obj.ascDate());
+    fill.showPost(await request.reqPost());
+    // fill.showPost(await filter.ascDate());
     addDetailEvent();
 })();
