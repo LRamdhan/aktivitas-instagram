@@ -1,2 +1,2 @@
-# aktivitas-instagram
-Aktivitas Instagram is web that show the stats of aktivity and recent post on instagram.
+# Aktivitas-Instagram
+Aktivitas Instagram is web that shows the stats of aktivities and recent posts on instagram.
